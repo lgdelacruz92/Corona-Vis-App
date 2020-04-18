@@ -1,0 +1,9 @@
+{
+  "name": "corona-app-server",
+  "version": "1.0.0",
+  "description": "This is the server side application of coronap app",
+  "main": "index.js",
+  "author": "Lester Dela Cruz",
+  "license": "MIT",
+  "private": false
+}
