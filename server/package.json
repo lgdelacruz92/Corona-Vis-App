@@ -5,5 +5,18 @@
   "main": "index.js",
   "author": "Lester Dela Cruz",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "jest *.test.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-html-parser": "^1.2.16",
+    "nodemon": "^2.0.3"
+  },
+  "devDependencies": {
+    "jest": "^25.3.0",
+    "node-fetch": "^2.6.0"
+  }
 }
