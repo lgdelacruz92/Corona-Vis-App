@@ -1,15 +1,14 @@
 const express = require('express');
+const server = require('./server');
 const app = express();
 
 const port = 3000;
 
 app.get('/', (req, res) => {
-    fetch('https://www.worldometers.info/coronavirus/country/us/')
-        .then(resp => {
-            return resp.text();
-        })
+    server.getData()
         .then(text => {
-            res.send(text);
+            res.send({
+                data: text});
         })
         .catch(err => {
             console.log(err.message)
