@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import mapboxgl from 'mapbox-gl';
+
+mapboxgl.accessToken = 'pk.eyJ1IjoibGdkZWxhY3J1eiIsImEiOiJjanVqMjR2c2UwNHhjNGRtaXdicnlwNnN1In0.wEDSlf607s7WuQ49-AZhBA';
 
 function App() {
+
+  const mapContainerRef = React.useRef();
+
+  React.useEffect(() => {
+    new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-119.4179, 36.7783],
+      zoom: 4
+    });
+  })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div ref={mapContainerRef} className="mapContainer"/>
     </div>
   );
 }
