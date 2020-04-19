@@ -1,6 +1,5 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
-import { renderer } from './Renderer';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibGdkZWxhY3J1eiIsImEiOiJjanVqMjR2c2UwNHhjNGRtaXdicnlwNnN1In0.wEDSlf607s7WuQ49-AZhBA';
 
@@ -25,12 +24,16 @@ function App() {
         return resp.json();
       })
       .then(json => {
-        const coors = [];
+        const deaths = [];
         Object.keys(json).forEach(state => {
           if (json[state].coors) {
-            coors.push(
+            deaths.push(
               {
                 'type': 'Feature',
+                'properties': {
+                  'total_death': parseInt(json[state].total_death.replace(',', '')),
+                  'total_cases': parseInt(json[state].total_cases.replace(',', ''))
+                },
                 'geometry': {
                   'type': 'Point',
                   'coordinates': [json[state].coors.longitude, json[state].coors.latitude]
@@ -40,26 +43,45 @@ function App() {
           }
         });
 
-        const pulsingDot = renderer(map);
 
 
         map.on('load', function () {
-          map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
 
           map.addSource('points', {
             'type': 'geojson',
             'data': {
               'type': 'FeatureCollection',
-              'features': coors
+              'features': deaths
+            }
+          });
+
+
+
+          map.addLayer({
+            'id': 'cases',
+            'type': 'circle',
+            'source': 'points',
+            'paint': {
+              'circle-radius': [
+                'interpolate', ['linear'], ['zoom'], 
+                40, [ '/', ['get', 'total_cases'], 500],
+                100, [ '/', ['get', 'total_cases'], 100]
+              ],
+              'circle-color': 'rgba(255, 255, 0, 0.5)'
             }
           });
 
           map.addLayer({
             'id': 'points',
-            'type': 'symbol',
+            'type': 'circle',
             'source': 'points',
-            'layout': {
-              'icon-image': 'pulsing-dot'
+            'paint': {
+              'circle-radius': [
+                'interpolate', ['linear'], ['zoom'], 
+                10, [ '/', ['get', 'total_death'], 150],
+                100, [ '/', ['get', 'total_death'], 50]
+              ],
+              'circle-color': 'rgba(255, 0, 0, 0.4)'
             }
           });
         });
