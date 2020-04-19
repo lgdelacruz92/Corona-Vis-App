@@ -9,8 +9,7 @@ app.use(cors());
 app.get('/', (req, res) => {
     server.getData()
         .then(text => {
-            res.send({
-                data: text});
+            res.send(text);
         })
         .catch(err => {
             console.log(err.message)
