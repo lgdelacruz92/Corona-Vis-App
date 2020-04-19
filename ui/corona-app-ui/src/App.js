@@ -8,13 +8,27 @@ function App() {
   const mapContainerRef = React.useRef();
 
   React.useEffect(() => {
+
+    fetch('http://localhost:3001')
+      .then(resp => {
+        return resp.json();
+      })
+      .then(json => {
+        console.log(json);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
     new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [-119.4179, 36.7783],
       zoom: 4
     });
-  })
+  });
+
+
   return (
     <div className="App">
       <div ref={mapContainerRef} className="mapContainer"/>

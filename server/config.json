@@ -1,3 +1,4 @@
 {
-    "data_url": "https://www.worldometers.info/coronavirus/country/us/"
+    "corona_data_url": "https://www.worldometers.info/coronavirus/country/us/",
+    "states_coor_url": "https://www.latlong.net/category/states-236-14.html"
 }
