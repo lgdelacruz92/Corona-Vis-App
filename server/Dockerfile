@@ -5,7 +5,8 @@ COPY ./ ~/server
 
 WORKDIR "~/server"
 RUN npm install
+RUN npm install -g pm2
 
 EXPOSE 3001
 
-CMD ["npm", "start"]
+CMD ["pm2", "start", "index.js"]
