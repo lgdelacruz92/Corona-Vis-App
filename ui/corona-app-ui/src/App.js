@@ -1,9 +1,7 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibGdkZWxhY3J1eiIsImEiOiJjanVqMjR2c2UwNHhjNGRtaXdicnlwNnN1In0.wEDSlf607s7WuQ49-AZhBA';
-
-
+mapboxgl.accessToken = 'pk.eyJ1IjoibGdkZWxhY3J1eiIsImEiOiJjazk3Z3BhdGkwZXk4M210YTQyOGMzZW5mIn0.QPnkAxfCLIAltU8cY_q50g';
 
 function App() {
 
@@ -19,7 +17,7 @@ function App() {
     });
 
 
-    fetch('http://localhost:3001')
+    fetch('http://ec2-18-222-214-35.us-east-2.compute.amazonaws.com/')
       .then(resp => {
         return resp.json();
       })
